@@ -28,7 +28,7 @@ const Login = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@example.com"
               type={'email'}
-              focusBorderColor="green.400"
+              focusBorderColor="yellow.400"
             />
           </Box>
           <Box my={'4'}>
@@ -40,7 +40,7 @@ const Login = () => {
               onChange={e => setPassword(e.target.value)}
               placeholder="Enter Your Password"
               type={'password'}
-              focusBorderColor="green.400"
+              focusBorderColor="yellow.400"
             />
           </Box>
           <Box>
