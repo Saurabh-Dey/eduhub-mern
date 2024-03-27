@@ -16,7 +16,6 @@ const ForgetPassword = () => {
         <VStack spacing={'8'}>
           <Input
             required
-            id="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="abc@example.com"

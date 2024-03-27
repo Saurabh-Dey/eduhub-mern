@@ -12,8 +12,9 @@ import React from 'react';
 import './home.css';
 import { Link } from 'react-router-dom';
 import vg from '../../assets/images/bg.png';
-import { CgGoogle, CgYoutube } from 'react-icons/cg';
-import { SiCoursera, SiUdemy } from 'react-icons/si';
+
+import { FaGoogle, FaYoutube } from 'react-icons/fa';
+import { SiUdemy } from 'react-icons/si';
 import { DiAws } from 'react-icons/di';
 import introVideo from '../../assets/videos/intro.mp4';
 
@@ -72,9 +73,8 @@ const Home = () => {
           justifyContent={'space-evenly'}
           marginTop="4"
         >
-          <CgGoogle />
-          <CgYoutube />
-          <SiCoursera />
+          <FaGoogle />
+          <FaYoutube />
           <SiUdemy />
           <DiAws />
         </HStack>

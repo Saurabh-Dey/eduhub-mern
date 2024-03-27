@@ -65,7 +65,7 @@ const Register = () => {
               required
               id="name"
               value={name}
-              onChange={e => setEmail(e.target.value)}
+              onChange={e => setName(e.target.value)}
               placeholder="Your name"
               type={'text'}
               focusBorderColor="yellow.400"

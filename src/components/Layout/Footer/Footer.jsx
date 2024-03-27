@@ -21,13 +21,13 @@ const Footer = () => {
           color={'white'}
           fontSize={'50'}
         >
-          <a href="https://youtube.com/" target="_blank">
+          <a href="https://youtube.com/" target="blank">
             <FaYoutube />
           </a>
-          <a href="https://instragram.com/" target="_blank">
+          <a href="https://instragram.com/" target="blank">
             <FaInstagramSquare />
           </a>
-          <a href="https://github.com/" target="_blank">
+          <a href="https://github.com/" target="blank">
             <FaGithub />
           </a>
         </HStack>
