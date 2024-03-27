@@ -14,15 +14,13 @@ import { Link } from 'react-router-dom';
 import introVideo from '../../assets/videos/intro.mp4';
 import { RiSecurePaymentFill } from 'react-icons/ri';
 import termsAndCondition from '../../assets/docs/termsAndCondition';
+import me from '../../assets/images/me.jpeg';
 
 const Founder = () => {
   return (
     <Stack direction={['column', 'row']} spacing={['4', '16']} padding={'8'}>
       <VStack>
-        <Avatar
-          src="https://res-console.cloudinary.com/danuvw46s/thumbnails/v1/image/upload/v1710313364/aXVheWVwcmloOGR5c24ybWlqaTQ=/preview"
-          boxSize={['40', '48']}
-        />
+        <Avatar src={me} boxSize={['40', '48']} />
         <Text children="Co-Founder" opacity={0.7} />
       </VStack>
 
