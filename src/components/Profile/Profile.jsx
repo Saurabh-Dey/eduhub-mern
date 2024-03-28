@@ -86,9 +86,7 @@ const Profile = () => {
             <HStack>
               <Text children="Subscription" fontWeight={'bold'} />
               {user.subscription.status === 'active' ? (
-                <Button color={'yellow.500'} variant={'unstyled'}>
-                  Cancel Subscription
-                </Button>
+                <Button colorScheme={'yellow'}>Cancel Subscription</Button>
               ) : (
                 <Link to="/subscribe">
                   <Button colorScheme="yellow">Subscribe</Button>

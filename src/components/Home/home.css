@@ -55,10 +55,10 @@
   .container2 video {
     /* border: 2px solid rgb(72, 187, 120); */
     padding: 10px;
-    background-color: rgb(56, 161, 105);
+    background-color: #ecc94b;
     width: 100%;
     border-radius: 20px;
-    box-shadow: 0 0 64px rgba(5, 77, 62, 0.486);
+    box-shadow: 0 0 64px #ecc94b;
     outline: none;
   }
 }
