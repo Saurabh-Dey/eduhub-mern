@@ -10,8 +10,9 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/actions/user.js';
 
-// I want to change the backgroundColor of choose file button when I hover on it, make a css code for this
 export const fileUploadCss = {
   cursor: 'pointer',
   marginLeft: '-5%',
@@ -39,6 +40,8 @@ const Register = () => {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 
+  const dispatch = useDispatch();
+
   const changeImageHandler = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -50,12 +53,24 @@ const Register = () => {
     };
   };
 
+  const submitHandler = e => {
+    e.preventDefault();
+    const myForm = new FormData();
+
+    myForm.append('name', name);
+    myForm.append('email', email);
+    myForm.append('password', password);
+    myForm.append('file', image);
+
+    dispatch(register(myForm));
+  };
+
   return (
     <Container height={'95vh'}>
       <VStack height={'full'} justifyContent={'center'} spacing={'16'}>
         <Heading textTransform={'uppercase'} children={'Registration'} />
 
-        <form style={{ width: '100%' }}>
+        <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box m={'4'} display={'flex'} justifyContent={'center'}>
             <Avatar src={imagePrev} size={'2xl'} />
           </Box>
@@ -98,7 +113,7 @@ const Register = () => {
           <Box my={'4'}>
             <FormLabel htmlFor="chooseAvatar" children="Choose Avatar" />
             <Input
-              accept="image/"
+              accept="image/*"
               required
               id="chooseAvatar"
               type={'file'}

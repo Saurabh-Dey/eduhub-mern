@@ -57,6 +57,7 @@ const Home = () => {
             boxSize={'md'}
             src={vg}
             objectFit={'contain'}
+            rounded={'100%'}
           />
         </Stack>
       </div>

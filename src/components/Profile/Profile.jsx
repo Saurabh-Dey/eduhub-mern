@@ -18,37 +18,46 @@ import {
   VStack,
   useDisclosure,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import me from '../../assets/images/me.jpeg';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import { fileUploadCss } from '../Auth/Register';
-const Profile = () => {
-  const user = {
-    name: 'Sourav',
-    email: 'souravdey053bca@gmail.com',
-    createdAt: String(new Date().toISOString()),
-    role: 'user',
-    subscription: {
-      status: 'active',
-    },
-    playlist: [
-      {
-        course: 'fsfgwe',
-        poster:
-          'https://images.pexels.com/photos/5359974/pexels-photo-5359974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      },
-    ],
+import {
+  removeFromPlaylist,
+  updateProfilePicture,
+} from '../../redux/actions/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from '../../redux/actions/user';
+import toast from 'react-hot-toast';
+
+const Profile = ({ user }) => {
+  const dispatch = useDispatch();
+  const { loading, message, error } = useSelector(state => state.profile);
+
+  const removeFromPlaylistHandler = async id => {
+    console.log('Deleted playlist', id);
+    await dispatch(removeFromPlaylist(id));
+    dispatch(loadUser());
   };
 
-  const removeFromPlaylistHandler = id => {
-    console.log('Deletede playlist', id);
-  };
-
-  const changeImageSubmitHandler = (e, image) => {
+  const changeImageSubmitHandler = async (e, image) => {
     e.preventDefault();
-    console.log(image);
+    const myForm = new FormData();
+    myForm.append('file', image);
+    await dispatch(updateProfilePicture(myForm));
+    dispatch(loadUser());
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, message]);
 
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
@@ -64,7 +73,7 @@ const Profile = () => {
         padding={'8'}
       >
         <VStack>
-          <Avatar boxSize={'48'} src={me} />
+          <Avatar boxSize={'48'} src={user.avatar.url} />
           <Button onClick={onOpen} colorScheme="yellow" variant={'ghost'}>
             Change Photo
           </Button>
@@ -85,7 +94,7 @@ const Profile = () => {
           {user.role !== 'admin' && (
             <HStack>
               <Text children="Subscription" fontWeight={'bold'} />
-              {user.subscription.status === 'active' ? (
+              {user.subscription && user.subscription.status === 'active' ? (
                 <Button colorScheme={'yellow'}>Cancel Subscription</Button>
               ) : (
                 <Link to="/subscribe">
@@ -127,6 +136,7 @@ const Profile = () => {
                   <Button colorScheme="yellow">Watch now</Button>
                 </Link>
                 <Button
+                  isLoading={loading}
                   onClick={() => removeFromPlaylistHandler(element.course)}
                 >
                   <MdDelete />
@@ -141,6 +151,7 @@ const Profile = () => {
         changeImageSubmitHandler={changeImageSubmitHandler}
         isOpen={isOpen}
         onClose={onClose}
+        loading={loading}
       />
     </Container>
   );
@@ -148,7 +159,12 @@ const Profile = () => {
 
 export default Profile;
 
-function ChangePhotoBox({ isOpen, onClose, changeImageSubmitHandler }) {
+function ChangePhotoBox({
+  isOpen,
+  onClose,
+  changeImageSubmitHandler,
+  loading,
+}) {
   const [image, setImage] = useState('');
   const [imagePrev, setImagePrev] = useState('');
 
@@ -185,7 +201,12 @@ function ChangePhotoBox({ isOpen, onClose, changeImageSubmitHandler }) {
                   css={{ '&::file-selector-button': fileUploadCss }}
                   onChange={changeImage}
                 />
-                <Button w={'full'} colorScheme="yellow" type="submit">
+                <Button
+                  isLoading={loading}
+                  w={'full'}
+                  colorScheme="yellow"
+                  type="submit"
+                >
                   Change
                 </Button>
               </VStack>

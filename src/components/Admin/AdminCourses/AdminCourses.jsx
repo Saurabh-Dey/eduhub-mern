@@ -44,10 +44,11 @@ const AdminCourses = () => {
   };
 
   const deleteLectureButtonHandler = (courseId, lectureId) => {
-    console.log(courseId, lectureId);
+    console.log(courseId);
+    console.log(lectureId);
   };
 
-  const addLectureHandler = (e, courseId, title, description) => {
+  const addLectureHandler = (e, courseId, title, description, video) => {
     e.preventDefault();
   };
   return (

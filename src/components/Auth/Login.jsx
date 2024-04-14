@@ -8,17 +8,30 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { login } from '../../redux/actions/user';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const submitHandler = e => {
+    e.preventDefault();
+
+    dispatch(login(email, password));
+  };
   return (
     <Container height={'95vh'}>
       <VStack height={'full'} justifyContent={'center'} spacing={'16'}>
-        <Heading children={'Welcome to KnowledgeCloud'} />
+        <Heading
+          children={'Welcome to Knowledge-Cloud'}
+          fontFamily={'cursive'}
+        />
 
-        <form style={{ width: '100%' }}>
+        <form style={{ width: '100%' }} onSubmit={submitHandler}>
           <Box my={'4'}>
             <FormLabel htmlFor="email" children="Email Address" />
             <Input
@@ -75,3 +88,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// why I am getting this error ? "Can't resolve 'url' in 'C:\Users\soura\Desktop\eduhub\coursebundler\node_modules\axios\lib\adapters'"

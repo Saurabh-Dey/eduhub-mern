@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Container,
   Grid,
@@ -11,7 +10,6 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
-import { fileUploadCss } from '../../Auth/Register';
 
 const CreateCourse = () => {
   const [title, setTitle] = useState('');
@@ -90,7 +88,7 @@ const CreateCourse = () => {
               ))}
             </Select>
             <Input
-              accept="image/"
+              accept="image/*"
               required
               type={'file'}
               focusBorderColor="purple.300"
