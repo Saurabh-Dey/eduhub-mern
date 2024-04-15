@@ -22,6 +22,8 @@ const Subscribe = ({ user }) => {
     state => state.subscription
   );
 
+  const { error: courseError } = useSelector(state => state.course);
+
   const subscribeHandler = async () => {
     const {
       data: { key },
@@ -35,6 +37,12 @@ const Subscribe = ({ user }) => {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
+
+    if (courseError) {
+      toast.error(courseError);
+      dispatch({ type: 'clearError' });
+    }
+
     if (subscriptionId) {
       const openPopUp = () => {
         const options = {
@@ -62,7 +70,15 @@ const Subscribe = ({ user }) => {
       };
       openPopUp();
     }
-  }, [dispatch, error, user.name, user.email, key, subscriptionId]);
+  }, [
+    dispatch,
+    error,
+    user.name,
+    user.email,
+    key,
+    subscriptionId,
+    courseError,
+  ]);
 
   return (
     <Container h={'90vh'} padding={'16'}>
