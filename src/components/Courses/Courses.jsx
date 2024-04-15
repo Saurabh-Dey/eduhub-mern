@@ -165,10 +165,10 @@ const Courses = () => {
               title={item.title}
               description={item.description}
               views={item.views}
-              // imageSrc={item.poster.url}
-              imageSrc={
-                'https://images.pexels.com/photos/3771074/pexels-photo-3771074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-              }
+              imageSrc={item.poster.url}
+              // imageSrc={
+              //   'https://images.pexels.com/photos/3771074/pexels-photo-3771074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              // }
               id={item._id}
               creator={item.createdBy}
               lectureCount={item.numOfVideos}
